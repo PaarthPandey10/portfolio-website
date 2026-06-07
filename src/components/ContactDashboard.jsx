@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ReactLenis } from '@studio-freight/react-lenis';
 
+const SquishyHeading = ({ text }) => {
+  return (
+    <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-20 leading-[0.85] flex flex-wrap cursor-crosshair">
+      {text.split('').map((char, i) => (
+        <motion.span
+          key={i}
+          whileHover={{ 
+            scaleY: [1, 0.4, 1.3, 0.9, 1], 
+            scaleX: [1, 1.5, 0.7, 1.1, 1], 
+            color: "#22d3ee" 
+          }}
+          transition={{ type: "spring", bounce: 0.7, duration: 0.6 }}
+          className="inline-block origin-bottom text-white transition-colors"
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </h2>
+  );
+};
+
 const ContactDashboard = ({ onClose, direction, dashPhysics }) => {
+  
+  // BUG FIX: Identical global scroll lock to maintain consistency
+  useEffect(() => {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   const contacts = [
     { id: '01', label: 'LINKEDIN', url: 'https://www.linkedin.com/in/paarth-pandey-13779529b/', text: 'linkedin.com/in/paarth-pandey-13779529b/' },
     { id: '02', label: 'EMAIL', url: 'mailto:paarthdxb@gmail.com', text: 'paarthdxb@gmail.com' },
@@ -28,10 +60,11 @@ const ContactDashboard = ({ onClose, direction, dashPhysics }) => {
 
   return (
     <motion.div 
-      initial={{ x: direction.x, y: direction.y, filter: "blur(30px)", scale: 1.2, opacity: 0 }}
-      animate={{ x: 0, y: 0, filter: "blur(0px)", scale: 1, opacity: 1 }}
-      exit={{ x: direction.x, y: direction.y, filter: "blur(30px)", scale: 0.8, opacity: 0 }}
+      initial={{ x: direction.x, y: direction.y, opacity: 0 }}
+      animate={{ x: 0, y: 0, opacity: 1 }}
+      exit={{ x: direction.x, y: direction.y, opacity: 0 }}
       transition={dashPhysics}
+      style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
       className="fixed inset-0 bg-black z-[200]"
     >
       <ReactLenis root={false} className="h-full overflow-y-auto no-scrollbar p-6 md:p-16">
@@ -40,19 +73,19 @@ const ContactDashboard = ({ onClose, direction, dashPhysics }) => {
           onClick={onClose}
           whileHover={{ x: -5, backgroundColor: "#27272a" }}
           whileTap={{ scale: 0.95 }}
-          className="font-mono text-sm font-bold text-zinc-300 tracking-[0.2em] transition-all duration-300 uppercase mb-16 flex items-center gap-4 bg-zinc-900/80 border border-zinc-700 px-8 py-4 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.3)] w-fit"
+          className="font-mono text-sm md:text-base font-bold text-zinc-300 tracking-[0.1em] md:tracking-[0.2em] transition-all duration-300 uppercase mb-16 flex items-center gap-4 bg-zinc-900/80 border border-zinc-700 px-6 py-3 md:px-8 md:py-4 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.3)] w-fit group"
         >
-          {'<<'} REVERT_
+          <motion.span 
+            transition={{ duration: 0.3, ease: "easeOut" }} 
+            className="inline-block text-white group-hover:-translate-x-2 transition-transform"
+          >
+            {'<<'}
+          </motion.span> 
+          REVERT_
         </motion.button>
 
         <div className="max-w-7xl mx-auto w-full">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-20 leading-[0.85]"
-          >
-            CONTACT REGISTRY
-          </motion.h2>
+          <SquishyHeading text="CONTACT REGISTRY" />
           
           <motion.div 
             variants={containerVariants}
@@ -90,4 +123,4 @@ const ContactDashboard = ({ onClose, direction, dashPhysics }) => {
   );
 };
 
-export default ContactDashboard;    
+export default ContactDashboard;

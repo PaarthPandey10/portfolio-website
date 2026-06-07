@@ -1,8 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function HeroPortal() {
+  const [showArchive, setShowArchive] = useState(true);
   const containerRef = useRef(null);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
@@ -11,6 +13,12 @@ export default function HeroPortal() {
   // Scale the text progressively as user scrolls
   const scale = useTransform(scrollYProgress, [0, 1], [1, 4]);
   const opacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 1, 0]);
+
+  // Set timer to hide text after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setShowArchive(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <motion.section
@@ -35,10 +43,14 @@ export default function HeroPortal() {
         </h1>
       </motion.div>
 
-      {/* Subtle bottom cue */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 font-mono text-xs text-zinc-600 tracking-widest">
+      {/* Subtle bottom cue - Fades out after 5 seconds */}
+      <motion.div 
+        animate={{ opacity: showArchive ? 1 : 0 }}
+        transition={{ duration: 1 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 font-mono text-xs text-zinc-600 tracking-widest pointer-events-none"
+      >
         ENTER THE ARCHIVE
-      </div>
+      </motion.div>
     </motion.section>
   );
 }

@@ -12,6 +12,7 @@ const Education = ({ onEnterVoid }) => {
       duration: '2025-2029',
       location: 'Jaipur, India',
       modality: 'Onsite',
+      sectionTitle: 'DESCRIPTION', // OVERRIDES "RESPONSIBILITIES"
       responsibilities: [
         'Focus: Cybersecurity (CRYX Club) - leading student cybersecurity initiative',
         'Marketing Team Member for Sphinx\'25 and Blitzschlag\'26',
@@ -28,6 +29,7 @@ const Education = ({ onEnterVoid }) => {
       duration: 'Graduated March 2025',
       location: 'Dubai, UAE',
       modality: 'Onsite',
+      sectionTitle: 'DESCRIPTION', // OVERRIDES "RESPONSIBILITIES"
       responsibilities: [
         'Graduated with Distinction in Science stream (95.4% in 12th, 97.8% in 10th)',
         'Recipient of the Genius & Specialist Award',

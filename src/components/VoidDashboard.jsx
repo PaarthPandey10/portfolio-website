@@ -3,7 +3,6 @@ import { motion, Reorder } from 'framer-motion';
 import { ReactLenis } from '@studio-freight/react-lenis';
 import BlurText from './BlurText';
 
-// --- SQUASH & STRETCH HEADING (Cartoon Physics) ---
 const SquishyHeading = ({ text }) => {
   return (
     <h3 className="text-2xl font-black uppercase tracking-tighter mb-8 text-white flex cursor-cell">
@@ -25,7 +24,6 @@ const SquishyHeading = ({ text }) => {
   );
 };
 
-// --- THE MAIN DRAGGABLE THOR GRID ---
 const ThorGrid = ({ children }) => {
   const [pullCount, setPullCount] = useState(0);
   const [isNudging, setIsNudging] = useState(false);
@@ -57,13 +55,11 @@ const ThorGrid = ({ children }) => {
   );
 };
 
-// --- MINI THOR SKILL (Transforms on click, listens to Global Heal) ---
 const ThorSkill = ({ children, healSignal }) => {
   const [isButtoned, setIsButtoned] = useState(false);
   const [pullCount, setPullCount] = useState(0);
   const [isNudging, setIsNudging] = useState(false);
 
-  // Global Heal Listener
   useEffect(() => {
     if (healSignal > 0) {
       setIsButtoned(false);
@@ -86,11 +82,12 @@ const ThorSkill = ({ children, healSignal }) => {
   if (!isButtoned) {
     return (
       <motion.li 
-        initial={{ x: 0, color: "#71717a" }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
         whileHover={{ x: 12, color: "#ffffff" }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsButtoned(true)}
-        className="flex gap-4 items-center cursor-pointer group"
+        className="flex gap-4 items-center cursor-pointer group text-zinc-500 hover:text-white transition-colors"
       >
         <div className="w-1.5 h-1.5 bg-zinc-800 group-hover:bg-white transition-colors duration-300 rounded-full" />
         <span className="text-sm md:text-base font-mono uppercase tracking-wider select-none">{children}</span>
@@ -106,33 +103,32 @@ const ThorSkill = ({ children, healSignal }) => {
       onDragEnd={handleDragEnd}
       animate={isNudging ? { x: [0, -8, 8, -5, 5, 0] } : { x: 0, y: 0 }}
       transition={springPhysics}
-      className="inline-flex items-center px-4 py-2 bg-zinc-900 border border-zinc-700 cursor-grab active:cursor-grabbing select-none hover:bg-white hover:text-black transition-colors duration-300 shadow-[inset_0_-4px_0_rgba(0,0,0,0.5)] active:shadow-[inset_0_0_0_rgba(0,0,0,0)] active:translate-y-1"
+      className="inline-flex items-center px-4 py-2 bg-zinc-900 border border-zinc-700 cursor-grab active:cursor-grabbing select-none hover:bg-white hover:text-black transition-colors duration-300 shadow-[inset_0_-4px_0_rgba(0,0,0,0.5)] active:shadow-[inset_0_0_0_rgba(0,0,0,0)] active:translate-y-1 text-white"
     >
       <span className="text-sm font-mono uppercase font-bold tracking-widest">{children}</span>
     </motion.li>
   );
 };
 
-// --- INTERACTIVE RESPONSIBILITY ITEM (Listens to Global Heal) ---
 const InteractiveListItem = ({ children, healSignal }) => {
   const [isNeutralized, setIsNeutralized] = useState(false);
 
-  // Global Heal Listener
   useEffect(() => {
     if (healSignal > 0) setIsNeutralized(false);
   }, [healSignal]);
 
   return (
     <motion.div 
-      initial={{ x: 0, color: "#71717a" }}
-      whileHover={{ x: 12, color: "#ffffff", scale: 1.02 }}
-      whileTap={{ scale: 0.95, cursor: "grabbing" }}
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      whileHover={{ x: 12, color: "#ffffff", scale: 1.01 }}
+      whileTap={{ scale: 0.98, cursor: "grabbing" }}
       onClick={() => setIsNeutralized(!isNeutralized)}
-      className={`flex gap-4 items-start cursor-grab active:cursor-grabbing group p-2 -ml-2 rounded-md hover:bg-zinc-900 transition-colors ${isNeutralized ? 'line-through text-zinc-800 opacity-50' : ''}`}
+      className={`flex gap-4 items-start cursor-grab active:cursor-grabbing group p-2 -ml-2 rounded-md hover:bg-zinc-900 transition-colors text-zinc-400 ${isNeutralized ? 'line-through text-zinc-800 opacity-50' : ''}`}
     >
       <motion.span 
         animate={{ rotate: isNeutralized ? 90 : 0 }} 
-        className="text-zinc-700 font-mono mt-1 text-xs transition-colors group-hover:text-white"
+        className="text-zinc-700 font-mono mt-1 text-xs transition-colors group-hover:text-white shrink-0"
       >
         {isNeutralized ? 'X' : '|||'} 
       </motion.span>
@@ -141,47 +137,45 @@ const InteractiveListItem = ({ children, healSignal }) => {
   );
 };
 
-// --- MAIN EXPORT COMPONENT ---
 export default function VoidDashboard({ data, onClose, direction, dashPhysics }) {
-  const [responsibilities, setResponsibilities] = useState([]);
-  const [metaItems, setMetaItems] = useState([]);
+  const [responsibilities, setResponsibilities] = useState(data?.responsibilities || []);
+  const [metaItems] = useState([data?.company, data?.type, data?.duration, data?.location, data?.modality].filter(Boolean));
   const [whackedIndices, setWhackedIndices] = useState([]);
   
-  // Interaction States
   const [nudgeReset, setNudgeReset] = useState(false);
   const [autoResetPanic, setAutoResetPanic] = useState(false);
-  
-  // The Majestic King Heal State
   const [healSignal, setHealSignal] = useState(0);
   const [isHealing, setIsHealing] = useState(false);
 
+  // BUG FIX: Lock the native scrollbar INSTANTLY to prevent layout shift popping
   useEffect(() => {
-    if (data) {
-      setResponsibilities(data.responsibilities || []);
-      setMetaItems([data.company, data.type, data.duration, data.location, data.modality].filter(Boolean));
-    }
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  useEffect(() => {
+    setResponsibilities(data?.responsibilities || []);
   }, [data]);
 
-  // --- THE 15 SECOND PANIC TIMER ---
   useEffect(() => {
     let timeout;
     if (whackedIndices.length > 0 && !autoResetPanic) {
-      // 15,000ms = 15 seconds
-      timeout = setTimeout(() => {
-        setAutoResetPanic(true);
-      }, 15000);
+      timeout = setTimeout(() => setAutoResetPanic(true), 15000);
     }
     return () => clearTimeout(timeout);
   }, [whackedIndices, autoResetPanic]);
 
-  // Handle the panic animation duration before actually resetting
   useEffect(() => {
     let panicTimeout;
     if (autoResetPanic) {
       panicTimeout = setTimeout(() => {
         setWhackedIndices([]);
         setAutoResetPanic(false);
-      }, 1500); // Panics for 1.5 seconds, then heals
+      }, 1500);
     }
     return () => clearTimeout(panicTimeout);
   }, [autoResetPanic]);
@@ -201,13 +195,12 @@ export default function VoidDashboard({ data, onClose, direction, dashPhysics })
     }
   };
 
-  // --- THE KING's GLOBAL HEAL ACTION ---
   const handleKingHeal = () => {
     setIsHealing(true);
-    setHealSignal((prev) => prev + 1); // Broadcasts to all child components
-    setWhackedIndices([]); // Heals flattened metadata
-    setResponsibilities(data.responsibilities || []); // Resets shuffled order
-    setTimeout(() => setIsHealing(false), 1200); // Glow duration
+    setHealSignal((prev) => prev + 1);
+    setWhackedIndices([]); 
+    setResponsibilities(data.responsibilities || []);
+    setTimeout(() => setIsHealing(false), 1200); 
   };
 
   const containerVariants = {
@@ -215,28 +208,25 @@ export default function VoidDashboard({ data, onClose, direction, dashPhysics })
   };
 
   const itemVariants = {
-    initial: { y: 20, opacity: 0, filter: "blur(10px)" },
-    animate: { y: 0, opacity: 1, filter: "blur(0px)", transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
+    initial: { y: 20, opacity: 0 },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
   };
 
   return (
     <motion.div 
       className="fixed inset-0 bg-black z-[100] text-white font-sans antialiased flex flex-col"
-      initial={{ x: direction.x, y: direction.y, filter: "blur(30px)", scale: 1.2, opacity: 0 }}
-      animate={{ x: 0, y: 0, filter: "blur(0px)", scale: 1, opacity: 1 }}
-      exit={{ x: direction.x, y: direction.y, filter: "blur(30px)", scale: 0.8, opacity: 0 }}
+      initial={{ x: direction.x, y: direction.y, opacity: 0 }}
+      animate={{ x: 0, y: 0, opacity: 1 }}
+      exit={{ x: direction.x, y: direction.y, opacity: 0 }}
       transition={dashPhysics}
-      style={{ willChange: "transform, filter" }}
+      style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
     >
-      <ReactLenis root={false} className="h-full overflow-y-auto no-scrollbar p-6 md:p-12">
-        
-        {/* Revert Button */}
-        {/* Tactical Revert Button */}
+      <ReactLenis root={false} className="h-full overflow-y-auto no-scrollbar p-6 md:p-16">
         <motion.button 
           onClick={onClose}
           whileHover={{ x: -5, backgroundColor: "#27272a" }}
           whileTap={{ scale: 0.95 }}
-          className="font-mono text-sm md:text-base font-bold text-zinc-300 tracking-[0.1em] md:tracking-[0.2em] transition-all duration-300 uppercase mb-12 flex items-center gap-4 bg-zinc-900/80 border border-zinc-700 px-6 py-3 md:px-8 md:py-4 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.3)] w-fit group"
+          className="font-mono text-sm md:text-base font-bold text-zinc-300 tracking-[0.1em] md:tracking-[0.2em] transition-all duration-300 uppercase mb-16 flex items-center gap-4 bg-zinc-900/80 border border-zinc-700 px-6 py-3 md:px-8 md:py-4 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.3)] w-fit group"
         >
           <motion.span 
             transition={{ duration: 0.3, ease: "easeOut" }} 
@@ -247,12 +237,10 @@ export default function VoidDashboard({ data, onClose, direction, dashPhysics })
           REVERT TO CORE_
         </motion.button>
 
-        <motion.div variants={containerVariants} initial="initial" animate="animate" className="max-w-6xl mx-auto w-full">
+        <motion.div variants={containerVariants} initial="initial" animate="animate" className="max-w-7xl mx-auto w-full">
           
-          {/* Header Section */}
-          <div className="mb-16 border-b border-zinc-800 pb-8 flex justify-between items-end" style={{ perspective: 1000 }}>
+          <div className="mb-16 border-b border-zinc-800 pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-8" style={{ perspective: 1000 }}>
             <div className="flex-1">
-              {/* THE MAJESTIC KING: Grand Title Heal Animation */}
               <motion.div 
                 onClick={handleKingHeal}
                 whileHover={{ scale: 1.01 }}
@@ -276,7 +264,6 @@ export default function VoidDashboard({ data, onClose, direction, dashPhysics })
                 />
               </motion.div>
               
-              {/* Whack-a-Mole Metadata Bar (Tom & Jerry Squash) */}
               <motion.div variants={itemVariants} className="flex flex-wrap gap-4 font-mono text-xs md:text-sm text-zinc-500 tracking-widest uppercase items-center">
                 {metaItems.map((item, idx) => (
                   <React.Fragment key={idx}>
@@ -299,7 +286,6 @@ export default function VoidDashboard({ data, onClose, direction, dashPhysics })
               </motion.div>
             </div>
 
-            {/* Whack-a-Mole Reset Button (With Panic States) */}
             <motion.button
               onClick={handleResetMeta}
               animate={
@@ -312,19 +298,17 @@ export default function VoidDashboard({ data, onClose, direction, dashPhysics })
               whileHover={!autoResetPanic ? { scale: 1.1 } : {}}
               whileTap={!autoResetPanic ? { scale: 0.95 } : {}}
               transition={{ duration: autoResetPanic ? 0.6 : 0.2 }}
-              className="hidden md:flex ml-8 w-12 h-12 items-center justify-center rounded-full font-black text-xl shadow-[0_4px_0_#52525b] active:shadow-[0_0px_0_#52525b] active:translate-y-1 transition-all"
+              className="hidden md:flex w-12 h-12 shrink-0 items-center justify-center rounded-full font-black text-xl shadow-[0_4px_0_#52525b] active:shadow-[0_0px_0_#52525b] active:translate-y-1 transition-all"
             >
               {autoResetPanic ? "!" : "↑"}
             </motion.button>
           </div>
 
-          {/* THE DRAGGABLE THOR GRID */}
           <ThorGrid>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-zinc-800 border border-zinc-800">
+            <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-zinc-800 border border-zinc-800">
               
-              {/* Responsibilities Pane (Reorderable) */}
-              <motion.div variants={itemVariants} className="bg-black p-8 md:p-12 pointer-events-auto">
-                <SquishyHeading text="RESPONSIBILITIES" />
+              <div className="bg-black p-8 md:p-12 pointer-events-auto min-h-[400px]">
+                <SquishyHeading text={data.sectionTitle || "RESPONSIBILITIES"} />
                 <Reorder.Group axis="y" values={responsibilities} onReorder={setResponsibilities} className="space-y-2">
                   {responsibilities.map((res) => (
                     <Reorder.Item key={res} value={res}>
@@ -332,22 +316,21 @@ export default function VoidDashboard({ data, onClose, direction, dashPhysics })
                     </Reorder.Item>
                   ))}
                 </Reorder.Group>
-              </motion.div>
+              </div>
 
-              {/* Skills & Tech Pane (Transformable Thor Buttons) */}
-              <motion.div variants={itemVariants} className="bg-black p-8 md:p-12 pointer-events-auto">
+              <div className="bg-black p-8 md:p-12 pointer-events-auto min-h-[400px]">
                 <SquishyHeading text="SKILLS & TECH" />
                 <ul className="flex flex-wrap gap-4">
                   {data.skills?.map((skill, idx) => (
                     <ThorSkill key={idx} healSignal={healSignal}>{skill}</ThorSkill>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
 
-            </div>
+            </motion.div>
           </ThorGrid>
         </motion.div>
       </ReactLenis>
     </motion.div>
   );
-}
+} 

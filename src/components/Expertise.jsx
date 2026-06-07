@@ -162,7 +162,7 @@ const Expertise = ({ onEnterVoid }) => {
                   {cert.title}
                 </span>
                 <span className="font-mono text-xs text-zinc-600 opacity-0 group-hover:opacity-100 transition-opacity tracking-widest ml-4 mt-1 md:mt-0 shrink-0">
-                  [VERIFY_]
+                  [VERIFY]
                 </span>
               </a>
             </motion.li>
