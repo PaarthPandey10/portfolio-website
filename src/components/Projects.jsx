@@ -68,7 +68,7 @@ const Projects = ({ onEnterVoid }) => {
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true, margin: '-100px' }} className="w-full">
         <div className="mb-20">
           <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">/ PROJECTS</p>
-          <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white">TECHNICAL WORK</h2>
+          <h2 className="text-[11vw] md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white">TECHNICAL WORK</h2>
         </div>
 
         <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} className="w-full space-y-0 border-t border-b border-zinc-800">

@@ -3,21 +3,31 @@ import { motion } from 'framer-motion';
 import { ReactLenis } from '@studio-freight/react-lenis';
 
 const SquishyHeading = ({ text }) => {
+  // FIX: Grouping by words so "REGISTRY" drops to the next line cleanly on mobile
   return (
-    <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-20 leading-[0.85] flex flex-wrap cursor-crosshair">
-      {text.split('').map((char, i) => (
-        <motion.span
-          key={i}
-          whileHover={{ 
-            scaleY: [1, 0.4, 1.3, 0.9, 1], 
-            scaleX: [1, 1.5, 0.7, 1.1, 1], 
-            color: "#22d3ee" 
-          }}
-          transition={{ type: "spring", bounce: 0.7, duration: 0.6 }}
-          className="inline-block origin-bottom text-white transition-colors"
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
+    <h2 className="text-[13vw] md:text-8xl font-black uppercase tracking-tighter mb-16 leading-[0.85] flex flex-wrap cursor-crosshair">
+      {text.split(' ').map((word, wIdx) => (
+        <div key={wIdx} className="flex mr-[4vw] md:mr-8 last:mr-0">
+          {word.split('').map((char, i) => (
+            <motion.span
+              key={i}
+              whileHover={{ 
+                scaleY: [1, 0.4, 1.3, 0.9, 1], 
+                scaleX: [1, 1.5, 0.7, 1.1, 1], 
+                color: "#22d3ee" 
+              }}
+              whileTap={{ 
+                scaleY: [1, 0.4, 1.3, 0.9, 1], 
+                scaleX: [1, 1.5, 0.7, 1.1, 1], 
+                color: "#22d3ee" 
+              }}
+              transition={{ type: "spring", bounce: 0.7, duration: 0.6 }}
+              className="inline-block origin-bottom text-white transition-colors"
+            >
+              {char}
+            </motion.span>
+          ))}
+        </div>
       ))}
     </h2>
   );
@@ -25,7 +35,6 @@ const SquishyHeading = ({ text }) => {
 
 const ContactDashboard = ({ onClose, direction, dashPhysics }) => {
   
-  // BUG FIX: Identical global scroll lock to maintain consistency
   useEffect(() => {
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
@@ -108,8 +117,8 @@ const ContactDashboard = ({ onClose, direction, dashPhysics }) => {
                     </span>
                   </div>
                   
-                  <div className="text-left md:text-right">
-                    <span className="font-mono text-lg md:text-2xl text-zinc-700 group-hover:text-white transition-all duration-500 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                  <div className="text-left md:text-right w-full overflow-hidden">
+                    <span className="font-mono text-[4vw] sm:text-lg md:text-2xl text-zinc-700 group-hover:text-white transition-all duration-500 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] break-words">
                       {node.text}
                     </span>
                   </div>

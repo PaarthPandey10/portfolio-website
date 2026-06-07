@@ -69,7 +69,12 @@ function App() {
   }, [activeVoidData, showContactDashboard, isLoading, scrollPos]);
 
   return (
-    <ReactLenis root options={{ lerp: 0.08, smoothWheel: true }}>
+    <ReactLenis root options={{ 
+      lerp: 0.08, 
+      smoothWheel: true,
+      syncTouch: false, // Prevents Lenis from hijacking touch scrolls
+      smoothTouch: false // Lets iOS/Android handle their own momentum scrolling
+      }}>
       <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black font-sans overflow-x-hidden antialiased relative z-0">
         
         <AnimatePresence mode="wait">

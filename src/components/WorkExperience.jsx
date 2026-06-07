@@ -70,7 +70,7 @@ const WorkExperience = ({ onEnterVoid }) => {
         
         <div className="mb-20">
           <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">/ WORK EXPERIENCE</p>
-          <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white">
+          <h2 className="text-[11vw] md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white">
             INTERNSHIPS & ROLES
           </h2>
         </div>

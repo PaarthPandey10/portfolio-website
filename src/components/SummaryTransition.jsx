@@ -21,16 +21,22 @@ const SummaryTransition = () => {
   };
 
   return (
-    <section className="min-h-screen bg-black flex items-center justify-center px-6 md:px-20 border-t border-zinc-900 relative z-10">
+    <section className="min-h-screen bg-black flex items-center justify-center px-4 md:px-20 border-t border-zinc-900 relative z-10 w-full overflow-hidden">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-100px' }}
         variants={containerVariants}
-        className="text-center max-w-6xl"
+        // Added w-full to ensure it respects the parent constraints
+        className="text-center w-full max-w-7xl"
       >
         {lines.map((line, idx) => (
-          <div key={idx} className="text-6xl md:text-9xl font-black tracking-tighter uppercase leading-[0.95] text-white">
+          // FIX: Swapped fixed 6xl/9xl for mathematically calculated vw units. 
+          // 7.5vw ensures a 14-letter word never exceeds 100% of the screen width.
+          <div 
+            key={idx} 
+            className="text-[7.5vw] sm:text-[6.5vw] md:text-[5.5vw] lg:text-[5vw] xl:text-8xl font-black tracking-tighter uppercase leading-[0.95] text-white break-words"
+          >
             <DecryptedText 
               text={line.text}
               animateOn="view"

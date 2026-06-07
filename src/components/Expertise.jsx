@@ -88,7 +88,7 @@ const Expertise = ({ onEnterVoid }) => {
       {/* 1. ACCOLADES */}
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} className="mb-48 md:mb-64 w-full">
         <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">/ ACHIEVEMENTS</p>
-        <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-12">ACCOLADES</h2>
+        <h2 className="text-[11vw] md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white">ACCOLADES</h2>
         
         <motion.div variants={containerVariants} className="w-full space-y-0 border-t border-b border-zinc-800">
           {accolades.map((acc) => (
@@ -125,7 +125,7 @@ const Expertise = ({ onEnterVoid }) => {
       {/* 2. DOMAINS - Full width table-row layout */}
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={fadeUp} className="mb-48 md:mb-64 w-full">
         <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">/ EXPERTISE</p>
-        <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-12">SKILLS & DOMAINS</h2>
+        <h2 className="text-[11vw] md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white">SKILLS & DOMAINS</h2>
         <div className="w-full space-y-0 border-t border-b border-zinc-800">
           {domains.map((domain, i) => (
             <div key={i} className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 p-8 md:p-12 border-b border-zinc-800 group cursor-crosshair transition-colors hover:bg-zinc-900">
@@ -143,7 +143,7 @@ const Expertise = ({ onEnterVoid }) => {
       {/* 3. CERTIFICATIONS - Two column grid layout */}
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={fadeUp} className="w-full">
         <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">/ VERIFICATION</p>
-        <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-12">CERTIFICATIONS</h2>
+        <h2 className="text-[7.5vw] md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white break-words">CERTIFICATIONS</h2>
         <ul className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 border-t border-zinc-800 pt-12">
           {certs.map((cert, i) => (
             <motion.li 
