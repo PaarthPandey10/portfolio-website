@@ -60,11 +60,12 @@ const Expertise = ({ onEnterVoid }) => {
   ];
 
   const certs = [
-    { title: 'IBM Z Mainframe - Advanced (2026) & Concepts (2025)', url: '#' },
-    { title: 'Certified Google Cybersecurity Professional (2025)', url: '#' },
-    { title: 'Trend Micro Vision One - XDR Professional (2025)', url: '#' },
-    { title: 'AWS Certified Cloud Practitioner (2025-2028)', url: '#' },
-    { title: 'Data Science & AI - IIT Madras (2025)', url: '#' }
+    { title: 'IBM Z Mainframe - Advanced (2026)', url: 'https://www.credly.com/badges/8195b7a5-7d5d-4b91-82f1-9b515c772e93' },
+    { title: 'IBM Z Mainframe - Concepts (2025)', url: 'https://www.credly.com/badges/5b2d9834-1c8a-4afa-babe-f50fc89c5061' },
+    { title: 'Certified Google Cybersecurity Professional (2025)', url: 'https://www.coursera.org/account/accomplishments/professional-cert/5OVD0EJY7KUR' },
+    { title: 'Trend Micro Vision One - XDR Professional (2025)', url: 'https://github.com/PaarthPandey10/certificates/blob/main/trend-vision-one-xdr-professional.pdf' },
+    { title: 'AWS Certified Cloud Practitioner (2025-2028)', url: 'https://cp.certmetrics.com/amazon/en/public/verify/credential/06b9a04785eb45d58357c3be8ad60efd' },
+    { title: 'Responsive Web Design - freeCodeCamp.org', url: 'https://www.freecodecamp.org/certification/paarthpandey10/responsive-web-design' }
   ];
 
   const fadeUp = {
