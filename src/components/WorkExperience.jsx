@@ -151,6 +151,7 @@ const WorkExperience = ({ onEnterVoid }) => {
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
               className="w-full cursor-pointer border-b border-zinc-800 transition-colors duration-300 p-8 md:p-12 text-left group flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+              whileTap={{ scale: 0.97, backgroundColor: 'rgb(24, 24, 27)' }}
             >
               {/* LEFT SIDE: Company & Designation */}
               <div className="flex-1">

@@ -66,6 +66,7 @@ const Education = ({ onEnterVoid }) => {
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgb(24, 24, 27)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
               className="w-full cursor-pointer border-b border-zinc-800 transition-colors duration-300 p-8 md:p-12 text-left group flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+              whileTap={{ scale: 0.97, backgroundColor: 'rgb(24, 24, 27)' }}
             >
               <div className="flex-1">
                 <h3 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-[0.9] text-white group-hover:text-white transition-colors">

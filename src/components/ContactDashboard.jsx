@@ -45,7 +45,7 @@ const ContactDashboard = ({ onClose, direction, dashPhysics }) => {
   }, []);
 
   const contacts = [
-    { id: '01', label: 'LINKEDIN', url: 'https://www.linkedin.com/in/paarth-pandey-13779529b/', text: 'linkedin.com/in/paarth-pandey-13779529b/' },
+    { id: '01', label: 'LINKEDIN', url: 'https://www.linkedin.com/in/paarthpandey', text: 'linkedin.com/in/paarthpandey' },
     { id: '02', label: 'EMAIL', url: 'mailto:paarthdxb@gmail.com', text: 'paarthdxb@gmail.com' },
     { id: '03', label: 'GITHUB', url: 'https://github.com/PaarthPandey10', text: 'github.com/PaarthPandey10' },
     { id: '04', label: 'CREDLY', url: 'https://www.credly.com/users/paarth-pandey.6d3d510b/badges', text: 'credly.com/users/paarth-pandey.6d3d510b/badges' },
@@ -81,7 +81,7 @@ const ContactDashboard = ({ onClose, direction, dashPhysics }) => {
         <motion.button 
           onClick={onClose}
           whileHover={{ x: -5, backgroundColor: "#27272a" }}
-          whileTap={{ scale: 0.95 }}
+          whileTap={{ scale: 0.97, backgroundColor: 'rgb(24, 24, 27)'  }}
           className="font-mono text-sm md:text-base font-bold text-zinc-300 tracking-[0.1em] md:tracking-[0.2em] transition-all duration-300 uppercase mb-16 flex items-center gap-4 bg-zinc-900/80 border border-zinc-700 px-6 py-3 md:px-8 md:py-4 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.3)] w-fit group"
         >
           <motion.span 

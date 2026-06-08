@@ -61,12 +61,11 @@ export default function Preloader({ fillComplete }) {
       {/* Top Metadata Status */}
       <div className="flex justify-between items-start text-xs text-zinc-500 tracking-widest uppercase">
         <div>
-          <p>SYS.INIT // PAARTH_PORTFOLIO_V2</p>
-          <p>LOC // DUBAI_AE</p>
+          <p>SYS.INIT // PAARTH_PORTFOLIO</p>
         </div>
         <div className="text-right">
           <p>STATUS: RUNNING</p>
-          <p>OPSEC_ENG_READY</p>
+          <p>READY</p>
         </div>
       </div>
 

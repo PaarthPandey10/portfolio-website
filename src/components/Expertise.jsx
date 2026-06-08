@@ -100,6 +100,7 @@ const Expertise = ({ onEnterVoid }) => {
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgb(24, 24, 27)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
               className="w-full cursor-pointer border-b border-zinc-800 p-8 md:p-12 transition-colors duration-300 text-left group flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+              whileTap={{ scale: 0.97, backgroundColor: 'rgb(24, 24, 27)' }}
             >
               <div className="flex-1">
                 <h3 className="text-3xl md:text-5xl font-black tracking-tighter uppercase leading-[0.9] text-white group-hover:text-white transition-colors">
@@ -124,7 +125,7 @@ const Expertise = ({ onEnterVoid }) => {
       </motion.div>
 
       {/* 2. DOMAINS - Full width table-row layout */}
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={fadeUp} className="mb-48 md:mb-64 w-full">
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={fadeUp} className="mb-48 md:mb-64 w-full" whileTap={{ scale: 0.97, backgroundColor: 'rgb(24, 24, 27)' }}>
         <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">/ EXPERTISE</p>
         <h2 className="text-[11vw] md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white">SKILLS & DOMAINS</h2>
         <div className="w-full space-y-0 border-t border-b border-zinc-800">
@@ -142,7 +143,7 @@ const Expertise = ({ onEnterVoid }) => {
       </motion.div>
 
       {/* 3. CERTIFICATIONS - Two column grid layout */}
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={fadeUp} className="w-full">
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={fadeUp} className="w-full" whileTap={{ scale: 0.97, backgroundColor: 'rgb(24, 24, 27)' }}>
         <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">/ VERIFICATION</p>
         <h2 className="text-[7.5vw] md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white break-words">CERTIFICATIONS</h2>
         <ul className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 border-t border-zinc-800 pt-12">
