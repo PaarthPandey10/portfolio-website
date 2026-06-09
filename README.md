@@ -26,62 +26,51 @@ I outgrew standard portfolio templates and wanted an upfront, minimalist space t
 ## Project Structure
 ```text
 paarth-portfolio/
-├── src/
-│   ├── components/
-│   │   ├── VoidDashboard.jsx
-│   │   ├── ContactDashboard.jsx
-│   │   ├── HeroPortal.jsx
-│   │   └── DecryptedText.jsx
-│   ├── App.jsx
-│   └── index.css
+├── dist/
+├── node_modules/
 ├── public/
-│   └── og-image.png
+├── src/
+├── .gitignore
+├── eslint.config.js
 ├── index.html
-└── package.json
-Usage / How to Use
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.js
+```
+
+## Usage / How to Use
 To run this portfolio locally for development or review:
 
 Clone the repository: git clone https://github.com/PaarthPandey10/paarth-portfolio.git
-
 Navigate into the directory: cd paarth-portfolio
-
 Install dependencies: npm install
-
 Start the Vite development server: npm run dev
-
 Open your browser to the local host port provided in your terminal.
 
-Features / Highlights
-Custom Physics Engine: Features draggable, reactive UI elements using tailored Framer Motion physics.
+## Features / Highlights
+* Custom Physics Engine: Features draggable, reactive UI elements using tailored Framer Motion physics.
+* Interactive Dashboards: Touch-reactive, mobile-optimized modules (whileTap integrated) replacing standard static lists.
+* Fluid Typography: Viewport-responsive scaling (vw) ensuring perfect edge-to-edge text rendering on all devices.
+* Technical Vault Integration: Direct linkage to my open-source cyberlaw and SOC 2 / ISO 27001 compliance documentation.
+* Smooth Scrolling: Integrated React Lenis for a seamless, high-end navigation experience.
 
-Interactive Dashboards: Touch-reactive, mobile-optimized modules (whileTap integrated) replacing standard static lists.
+## Technologies Used
+* Framework: React + Vite
+* Styling: Tailwind CSS
+* Animations: Framer Motion
+* Deployment: Cloudflare Pages
 
-Fluid Typography: Viewport-responsive scaling (vw) ensuring perfect edge-to-edge text rendering on all devices.
-
-Technical Vault Integration: Direct linkage to my open-source cyberlaw and SOC 2 / ISO 27001 compliance documentation.
-
-Smooth Scrolling: Integrated React Lenis for a seamless, high-end navigation experience.
-
-Technologies Used
-Framework: React + Vite
-
-Styling: Tailwind CSS
-
-Animations: Framer Motion
-
-Deployment: Cloudflare Pages
-
-Contributing
+## Contributing
 Not open for contributions. This is a personal portfolio repository.
 
-License
+## License
 MIT License.
 
-Contact
+## Contact
 Paarth Pandey
+[LinkedIn](https://www.linkedin.com/in/paarthpandey/) | [GitHub](https://github.com/PaarthPandey10) | paarthdxb@gmail.com
 
-LinkedIn | GitHub | paarthdxb@gmail.com
-
-Author: Paarth Pandey
-
-Custom React/Vite Interactive Portfolio
+> Author: Paarth Pandey
+> 
+> Legacy GitHub Pages Portfolio
