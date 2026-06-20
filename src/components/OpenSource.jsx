@@ -2,51 +2,49 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import GlitchText from './GlitchText';
 
-const Projects = ({ onEnterVoid }) => {
-  const projects = [
+const OpenSource = ({ onEnterVoid }) => {
+  const contributions = [
     {
       id: 0,
-      title: 'CORPORATE INVOICE AUTOMATION',
-      company: 'BARAKAH ADVISORS',
-      type: 'Architecture',
-      duration: 'June 2026',
-      location: 'Dubai, UAE',
-      modality: 'Enterprise',
+      title: 'WIRESHARK FOUNDATION',
+      company: 'OPEN SOURCE',
+      type: 'Open-Source Developer | Wiki-Editor',
+      duration: 'June 2026 - Present',
+      location: 'Global',
+      modality: 'Upstream Contributor',
       responsibilities: [
-        'Architected a firm-wide automated document generation system, migrating from Google Apps Script to MS Office to align with enterprise infrastructure.',
-        'Engineered VBA macros to process dynamic placeholders and automate VAT/GST calculations, drastically reducing manual workflow overhead.'
+        'Engineered a bare-metal EVE-NG lab environment to capture, analyze, and publish a pristine IKEv2 Site-to-Site IPsec VPN handshake utilizing AES-256-GCM and DH Group 19.',
+        'Successfully committed highly technical .pcapng artifacts upstream to the official Wireshark SampleCaptures wiki to support global protocol analysis.'
       ],
-      skills: ['VBA', 'Macros', 'MS Office', 'Google Apps Script', 'Data Privacy', 'Cyberlaw'],
+      skills: ['EVE-NG', 'IKEv2/IPsec', 'Wireshark', 'Packet Analysis', 'Cryptography'],
     },
     {
       id: 1,
-      title: 'ENTERPRISE LAB JOURNAL',
-      company: 'KNOWLEDGE BASE',
-      type: 'Documentation',
-      duration: 'Continuous',
-      location: 'GitHub',
-      modality: 'Portfolio',
+      title: 'OPENSSF',
+      company: 'OPEN SOURCE',
+      type: 'Open-Source Developer',
+      duration: 'June 2026 - Present',
+      location: 'Global',
+      modality: 'Working Groups',
       responsibilities: [
-        'Centralized repository aggregating mini-portfolios for Open-source Contributions, Google Cybersecurity, IBM Z Mainframe labs and AWS Cloud labs.',
-        'Maintained verified records of enterprise certifications and authored Trend Micro whitepapers.'
+        'Driving secure-by-design principles and global standards as a contributor across OpenSSF working groups.',
+        'Specifically focusing on Global Cyber Policy, Security Tooling, and Vulnerability Disclosures.'
       ],
-      skills: ['Git', 'Markdown', 'AWS', 'IBM ZOS'],
+      skills: ['Secure-by-Design', 'Cyber Policy', 'Vulnerability Disclosure'],
     },
     {
       id: 2,
-      title: 'FOCUS MATE AI',
-      company: 'UAE INNOVALTE',
-      type: 'Hackathon Finalist',
-      duration: 'March 2024',
-      location: 'UAE',
-      modality: 'Team Build',
+      title: 'OWASP',
+      company: 'OPEN SOURCE',
+      type: 'Open-Source Developer',
+      duration: 'June 2026 - Present',
+      location: 'Global',
+      modality: 'Standards',
       responsibilities: [
-        'Engineered an AI desktop application to track student attention',
-        'Integrated real-time computer vision data pipelines',
-        'Competed as National Finalists in the UAE InnovAlte Hackathon',
+        'Active contributor to OWASP, advancing global application security standards and secure coding practices.'
       ],
-      skills: ['Python', 'Computer Vision', 'Software Engineering'],
-    }
+      skills: ['AppSec', 'Security Standards', 'Vulnerability Management'],
+    },
   ];
 
   const containerVariants = {
@@ -60,15 +58,15 @@ const Projects = ({ onEnterVoid }) => {
   };
 
   return (
-    <section className="bg-black text-white px-6 md:px-20 py-32 flex flex-col justify-center relative z-10">
+    <section className="bg-black text-white px-6 md:px-20 py-32 border-t border-zinc-900 flex flex-col justify-center relative z-10">
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true, margin: '-100px' }} className="w-full">
         <div className="mb-20">
-          <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">/ PROJECTS</p>
-          <h2 className="text-[11vw] md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white">TECHNICAL WORK</h2>
+          <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">/ OPEN SOURCE</p>
+          <h2 className="text-[11vw] md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-white">CONTRIBUTIONS</h2>
         </div>
 
         <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} className="w-full space-y-0 border-t border-b border-zinc-800">
-          {projects.map((project) => (
+          {contributions.map((project) => (
             <motion.button
               key={project.id}
               variants={projectVariants}
@@ -102,4 +100,4 @@ const Projects = ({ onEnterVoid }) => {
   );
 };
 
-export default Projects;
+export default OpenSource;

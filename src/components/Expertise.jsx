@@ -52,10 +52,12 @@ const Expertise = ({ onEnterVoid }) => {
     },
   ];
 
+  // INJECTED NEW DOMAINS & SKILLS HERE
   const domains = [
-    { title: 'CYBERSECURITY', tech: 'XDR & Risk // TM Vision One // Red & Blue Teaming // Network Defense' },
-    { title: 'NETWORKING', tech: 'Network Architecture // CCNA (Pursuing)' },
-    { title: 'PROGRAMMING', tech: 'Python // C // SQL // HTML & CSS // Git' },
+    { title: 'CYBERSECURITY', tech: 'XDR & Risk // Threat Hunting // TM Vision One // Red & Blue Teaming // Network Defense' },
+    { title: 'COMPLIANCE', tech: 'Regulatory Compliance (SIRA/TDRA, CCPA/CPRA, DPDP, GDPR) // Cyberlaw' },
+    { title: 'NETWORKING', tech: 'EVE-NG // Network Virtualization // Network Architecture // CCNA (Pursuing)' },
+    { title: 'PROGRAMMING', tech: 'Python // VBA // C // SQL // HTML & CSS // Git' },
     { title: 'CLOUD & INFRA', tech: 'AWS // VMs // Linux // Windows // IBM ZOS' },
   ];
 

@@ -1,39 +1,7 @@
-/**
- * WorkExperience.jsx — POLISHED
- *
- * WHY THESE CHANGES:
- *
- * 1. STAGGER: 0.1 → 0.08, delayChildren 0.2 → 0.1
- *    Published portfolio sites stagger list items at 60-80ms intervals, not
- *    100-150ms. Faster stagger = the list feels like it "materializes" as a
- *    unit rather than items awkwardly queuing up. 80ms is the sweet spot where
- *    you perceive sequence without perceiving delay.
- *
- * 2. EASING: 'easeOut' → [0.16, 1, 0.3, 1] (custom expo-out bezier)
- *    Standard 'easeOut' is a browser cubic-bezier approximation. The custom
- *    curve [0.16, 1, 0.3, 1] has a more aggressive initial velocity that
- *    immediately captures attention, then a long, satisfying deceleration tail.
- *    The difference is subtle in isolation but the cumulative effect across
- *    every animation makes the site feel "different" — more intentional.
- *
- * 3. DURATION: 0.6 → 0.65
- *    The extra 50ms gives the custom bezier curve enough runway to show off its
- *    deceleration tail. Short durations clip the best part of expressive curves.
- *
- * 4. SPACING: section header `mb-20` (was implied, now explicit)
- *    The 20-unit bottom margin on the header creates proper visual separation
- *    between the label/heading cluster and the list — matches the visual weight
- *    of py-32 on the section.
- *
- * 5. HorizontalStory fix: mobile px changed from px-12 to px-6 to match global gutter
- */
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import GlitchText from './GlitchText';
 
-// PREMIUM EASING — used consistently across all list-section components.
-// Expo-out: fast entry burst → long elegant deceleration. Feels "published."
 const PREMIUM_EASE = [0.16, 1, 0.3, 1];
 
 const WorkExperience = ({ onEnterVoid }) => {
@@ -43,16 +11,17 @@ const WorkExperience = ({ onEnterVoid }) => {
       title: 'Tech-Legal Research Intern',
       company: 'Barakah Advisors',
       type: 'Legal Tech',
-      duration: 'June 2026',
+      duration: 'June 2026 - Present',
       location: 'Dubai, UAE',
       modality: 'Hybrid',
       responsibilities: [
-        'Drafted research reports on GPU-as-a-Service (GPUaaS) regulations',
-        'Analyzed cross-border data privacy compliance frameworks',
-        'Synthesized policy recommendations for emerging tech governance',
-        'Collaborated with legal and technical teams on regulatory alignment',
+        'Spearheaded research bridging technical computer science and legal compliance, specializing in data privacy and cyberlaw.',
+        'Analyzed the impact of global cybersecurity frameworks on enterprise data architectures to ensure legal and technical alignment.',
+        'Architected a firm-wide automated document generation system, migrating from Google Apps Script to MS Office to align with enterprise infrastructure.',
+        'Engineered VBA macros to process dynamic placeholders and automate VAT/GST calculations, drastically reducing manual workflow overhead.'
       ],
-      skills: ['Legal Research', 'GPU-as-a-Service (GPUaaS)', 'Data Privacy (GDPR, CCPA)', 'Cross-border Compliance', 'Policy Analysis', 'Technical Writing']
+      // ADDED: Compliance, Cyber-Risk, and Tech-Legal Alignment
+      skills: ['VBA', 'Macros', 'Data Privacy', 'Cyberlaw', 'Compliance', 'Cyber-Risk', 'Tech-Legal Alignment']
     },
     {
       id: 1,
@@ -93,7 +62,6 @@ const WorkExperience = ({ onEnterVoid }) => {
     visible: {
       opacity: 1,
       transition: {
-        // 80ms stagger: items materialize as a unit, not a queue
         staggerChildren: 0.08,
         delayChildren: 0.1,
       },
@@ -121,8 +89,6 @@ const WorkExperience = ({ onEnterVoid }) => {
         viewport={{ once: true, margin: '-100px' }}
         className="w-full"
       >
-        {/* Section header — mb-20 gives the heading cluster room to breathe
-            before the list begins. mb-16 felt cramped against the border-t. */}
         <div className="mb-20">
           <p className="font-mono text-xs tracking-[0.4em] text-zinc-500 uppercase mb-6">
             / WORK EXPERIENCE
@@ -153,7 +119,6 @@ const WorkExperience = ({ onEnterVoid }) => {
               className="w-full cursor-pointer border-b border-zinc-800 transition-colors duration-300 p-8 md:p-12 text-left group flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
               whileTap={{ scale: 0.97, backgroundColor: 'rgb(24, 24, 27)' }}
             >
-              {/* LEFT SIDE: Company & Designation */}
               <div className="flex-1">
                 <h3 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-[0.9] text-white group-hover:text-white transition-colors">
                   <GlitchText speed={1.5} enableShadows={false} enableOnHover={true}>
@@ -165,7 +130,6 @@ const WorkExperience = ({ onEnterVoid }) => {
                 </span>
               </div>
 
-              {/* RIGHT SIDE: Location, Modality, Duration */}
               <div className="flex flex-col items-start md:items-end text-left md:text-right mt-4 md:mt-0">
                 <span className="font-mono text-xs md:text-sm text-zinc-500 tracking-widest mb-1 md:mb-2 uppercase">
                   {exp.location} | {exp.modality}
@@ -173,8 +137,6 @@ const WorkExperience = ({ onEnterVoid }) => {
                 <p className="font-mono text-base md:text-xl tracking-[0.2em] text-zinc-400 uppercase mb-2">
                   {exp.duration}
                 </p>
-                {/* Arrow: `transition-colors duration-200` makes the color
-                    change snappy rather than laggy on hover */}
                 <motion.div
                   whileHover={{ x: 8 }}
                   transition={{ duration: 0.2, ease: PREMIUM_EASE }}

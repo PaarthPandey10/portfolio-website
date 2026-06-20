@@ -6,6 +6,7 @@ import HeroPortal from './components/HeroPortal';
 import SummaryTransition from './components/SummaryTransition';
 import WorkExperience from './components/WorkExperience';
 import Education from './components/Education';
+import OpenSource from './components/OpenSource';
 import Projects from './components/Projects';
 import Expertise from './components/Expertise';
 import FooterReveal from './components/FooterReveal';
@@ -51,7 +52,6 @@ function App() {
 
   const closeContact = () => {
     setShowContactDashboard(false);
-    // Smoothly scroll back to the bottom of the page
     setTimeout(() => {
       window.scrollTo({
         top: document.body.scrollHeight,
@@ -72,8 +72,8 @@ function App() {
     <ReactLenis root options={{ 
       lerp: 0.08, 
       smoothWheel: true,
-      syncTouch: false, // Prevents Lenis from hijacking touch scrolls
-      smoothTouch: false // Lets iOS/Android handle their own momentum scrolling
+      syncTouch: false,
+      smoothTouch: false 
       }}>
       <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black font-sans overflow-x-hidden antialiased relative z-0">
         
@@ -116,6 +116,7 @@ function App() {
               
               <WorkExperience onEnterVoid={enterVoid} />
               <Education onEnterVoid={enterVoid} />
+              <OpenSource onEnterVoid={enterVoid} />
               <Projects onEnterVoid={enterVoid} />
               <Expertise onEnterVoid={enterVoid} />
               
