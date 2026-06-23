@@ -20,6 +20,9 @@ const SummaryTransition = () => {
     },
   };
 
+  // Shared button styles to keep code clean
+  const buttonStyles = "inline-block px-8 py-4 border border-zinc-700 text-zinc-300 font-mono text-xs md:text-sm tracking-[0.2em] uppercase transition-colors outline-none cursor-pointer";
+
   return (
     <section className="min-h-screen bg-black flex items-center justify-center px-4 md:px-20 border-t border-zinc-900 relative z-10 w-full overflow-hidden">
       <motion.div
@@ -46,21 +49,48 @@ const SummaryTransition = () => {
           </div>
         ))}
 
-        {/* NEW: Centered Resume Button */}
-        <motion.a
-          href="https://1drv.ms/b/c/907395d00dce913c/IQC0s8ZZMOUeTYBKZqEHomwLATXLRwxc_LIMvX1O4-ZVH7Q?e=TwZ2MB"
-          target="_blank"
-          rel="noreferrer"
+        {/* Action Buttons Container */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }} // Delays so it fades in after text decrypts
-          whileHover={{ scale: 1.05, backgroundColor: "#ffffff", color: "#000000" }}
-          whileTap={{ scale: 0.95, backgroundColor: "#ffffff", color: "#000000" }} // Mobile Reactive
-          className="mt-16 md:mt-20 inline-block px-8 py-4 border border-zinc-700 text-zinc-300 font-mono text-xs md:text-sm tracking-[0.2em] uppercase transition-colors outline-none"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mt-16 md:mt-20 flex flex-wrap justify-center gap-4 md:gap-6 w-full"
         >
-          [ DOWNLOAD_RESUME ]
-        </motion.a>
+          <motion.a
+            href="https://1drv.ms/b/c/907395d00dce913c/IQC0s8ZZMOUeTYBKZqEHomwLATXLRwxc_LIMvX1O4-ZVH7Q?e=TwZ2MB"
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ scale: 1.05, backgroundColor: "#ffffff", color: "#000000" }}
+            whileTap={{ scale: 0.95, backgroundColor: "#ffffff", color: "#000000" }}
+            className={buttonStyles}
+          >
+            [ DOWNLOAD_RESUME ]
+          </motion.a>
+
+          <motion.a
+            href="https://github.com/paarthpandey10"
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ scale: 1.05, backgroundColor: "#ffffff", color: "#000000" }}
+            whileTap={{ scale: 0.95, backgroundColor: "#ffffff", color: "#000000" }}
+            className={buttonStyles}
+          >
+            [ GITHUB ]
+          </motion.a>
+
+          <motion.a
+            href="https://linkedin.com/in/paarthpandey" // verify this link matches your exact profile url
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ scale: 1.05, backgroundColor: "#ffffff", color: "#000000" }}
+            whileTap={{ scale: 0.95, backgroundColor: "#ffffff", color: "#000000" }}
+            className={buttonStyles}
+          >
+            [ LINKEDIN ]
+          </motion.a>
+        </motion.div>
+
       </motion.div>
     </section>
   );

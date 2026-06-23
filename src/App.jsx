@@ -20,6 +20,22 @@ function App() {
   const [voidDirection, setVoidDirection] = useState({ x: 0, y: 0 });
   const [scrollPos, setScrollPos] = useState(0);
 
+  // PRELOADER CACHE LOGIC: Check if user visited in the last hour
+  useEffect(() => {
+    const CACHE_KEY = 'portfolio_preloader_timestamp';
+    const ONE_HOUR = 60 * 60 * 1000; // 1 hour in milliseconds
+    const lastLoadTime = localStorage.getItem(CACHE_KEY);
+    const now = Date.now();
+
+    if (lastLoadTime && (now - parseInt(lastLoadTime, 10)) < ONE_HOUR) {
+      // If visited within the last hour, skip the loading screen
+      setIsLoading(false);
+    } else {
+      // Otherwise, set the current time in cache and let Preloader run
+      localStorage.setItem(CACHE_KEY, now.toString());
+    }
+  }, []);
+
   const dashPhysics = { 
     type: "spring", 
     damping: 30,
